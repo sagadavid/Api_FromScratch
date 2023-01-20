@@ -22,10 +22,16 @@ namespace FromScratchConsole2WebApi
         }
 
         //http request pipeline and environment
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public async void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            //middlewares!
+            /*
+             middlewares
+            */
 
+            /*
+             * //this section is about middleware flow..
+             * //this section is commented for the sake of endpointRouting
+             * 
             app.Use(async (context, next) =>
             { 
                 await context.Response.WriteAsync("response from app.use 1 1 \n"); 
@@ -46,9 +52,7 @@ namespace FromScratchConsole2WebApi
                 await next();
                 await context.Response.WriteAsync("response from app.use 2 2 \n");
             });
-            
            
-
             app.Use(async (context, next) =>
             {
                 await context.Response.WriteAsync("response from app.use without next()\n" +
@@ -63,15 +67,29 @@ namespace FromScratchConsole2WebApi
                 await context.Response.WriteAsync("response from app.run 1\n");
             });
 
-            
             app.Run(async context =>
             {
                 await context.Response.WriteAsync("response from app.run 2\n");
             });
 
             if (env.IsDevelopment()) { app.UseDeveloperExceptionPage(); }
+            
+             */
+
+            /* 
+             * endpointrouting
+             */
+
+            app.Use(async (context, next) =>
+            {
+            await context.Response.WriteAsync("now try endpointsrouting in address bar \n " +
+            "add [/api]/gettall or /getallauthors");
+            await next();
+            });
+
 
             app.UseRouting();//just enabling routing, not calling endpoint
+                             //a routing is basically mapping the incoming http request method
 
             app.UseEndpoints(endpoints =>
             {
@@ -79,7 +97,7 @@ namespace FromScratchConsole2WebApi
                 //those below is empty template and self mapping. so, comment them.
                 //and add mapcontrollers.
 
-                endpoints.MapControllers();
+                endpoints.MapControllers();//enables controllers' action methods to route
 
                 ////mapget allows exact url as endpoint
                 //endpoints.MapGet("/", async context =>

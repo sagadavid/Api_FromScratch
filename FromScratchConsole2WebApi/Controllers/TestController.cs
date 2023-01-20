@@ -5,7 +5,7 @@ namespace FromScratchConsole2WebApi.Controllers
     [ApiController]
     //[Route("/")]//routes main
     //[Route("test")]//routes test
-    [Route("test/[action]")]//reuires action method name for routing, unless 400
+    [Route("test/[action]")]//reuires action method name for routing, unless 404
     public class TestController:ControllerBase
     {
         public string Get() => "this is the resource to Get";

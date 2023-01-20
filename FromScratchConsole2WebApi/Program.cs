@@ -11,7 +11,6 @@ namespace FromScratchConsole2WebApi
             //Console.WriteLine("Hello World!");
             CreateHostBuilder(args).Build().Run();
         }
-
         public static IHostBuilder CreateHostBuilder(string[] args) => 
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webHost =>

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -18,8 +19,45 @@ namespace FromScratchConsole2WebApi
         }
 
         //http request pipeline and environment
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env) 
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            //middlewares!
+
+            app.Use(async (context, next) =>
+            { 
+                await context.Response.WriteAsync("this is app.use 1 1 \n"); 
+                //if next not used, doesnt skip to another middleware, dvs app.run
+                await next();
+                await context.Response.WriteAsync("this is app.use 1 2 \n");
+            });
+
+            app.Use(async (context, next) =>
+            {
+                await context.Response.WriteAsync("this is app.use 2 1 \n");
+                await next();
+                await context.Response.WriteAsync("this is app.use 2 2 \n");
+            });
+
+            app.Use(async (context, next) =>
+            {
+                await context.Response.WriteAsync("app.use without next,\n" +
+                    "designed as completer/backwardssender (instead of app.run) \n");
+            });
+
+            //need to pass in requestdelegate
+            app.Run(async context =>
+            {
+                //if the first run is not commented, it terminates pipline
+                //and 2nd run doesnt work,pipeline returns backwards and goes on
+                await context.Response.WriteAsync("this is app.run 1\n");
+            });
+
+            
+            app.Run(async context =>
+            {
+                await context.Response.WriteAsync("this is app.run 2\n");
+            });
+
             if (env.IsDevelopment()) { app.UseDeveloperExceptionPage(); }
 
             app.UseRouting();//just enabling routing, not calling endpoint

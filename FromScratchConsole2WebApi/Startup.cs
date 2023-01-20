@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
+using System.Threading;
 
 namespace FromScratchConsole2WebApi
 {
@@ -30,13 +32,19 @@ namespace FromScratchConsole2WebApi
                 await next();
                 await context.Response.WriteAsync("this is app.use 1 2 \n");
             });
-
+ 
+            //if mapping matches the route then funcs as a branch,
+            //after customresponse mehtod backwards cause has no next
+            app.Map("/saga", CustomResponse);//could be index as.. app.Map("", CustomResponse);
+            
             app.Use(async (context, next) =>
             {
                 await context.Response.WriteAsync("this is app.use 2 1 \n");
                 await next();
                 await context.Response.WriteAsync("this is app.use 2 2 \n");
             });
+            
+           
 
             app.Use(async (context, next) =>
             {
@@ -79,6 +87,15 @@ namespace FromScratchConsole2WebApi
                 //endpoints.MapGet("/newurl", async context =>
                 //await context.Response.WriteAsync("new url new message")
                 //);
+            });
+        }
+
+        private void CustomResponse(IApplicationBuilder app)
+        {
+            app.Use(async (context, next) =>
+            {
+                await context.Response.WriteAsync("response from mapped" +
+                    " customcode of route of /saga \n");
             });
         }
     }

@@ -26,7 +26,7 @@ namespace FromScratchConsole2WebApi
         public async void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             /*
-             middlewares
+             MIDDLEWARE
             */
 
             /*
@@ -78,10 +78,8 @@ namespace FromScratchConsole2WebApi
              */
 
             /* 
-             * endpointrouting
+             * ENDPOINTS
              */
-
-            // app.Map("", IndexMiddleware);//not routing to next??
 
             app.Use(async (context, next) =>
             {
@@ -93,7 +91,7 @@ namespace FromScratchConsole2WebApi
             app.UseRouting();//just enabling routing, not calling endpoint
                              //a routing is basically mapping the incoming http request method
 
-           
+            // app.Map("", IndexMiddleware);//not routing to next??
 
             app.UseEndpoints(endpoints =>
             {

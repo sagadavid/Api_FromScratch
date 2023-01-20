@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel;
 
 namespace FromScratchConsole2WebApi.Controllers
 {
@@ -21,7 +22,7 @@ namespace FromScratchConsole2WebApi.Controllers
             return "return of getallauthors action"; 
         }
 
-        /*dynamic values (variables) in route*/
+        /* VARIABLES/DYNAMIC VALUES IN ROUTING */
 
         [Route("/{bookId}")]//variable in {}
         [Route("/book/{bookId}")]
@@ -32,6 +33,16 @@ namespace FromScratchConsole2WebApi.Controllers
         [Route("/book/{bookId}/citation/{citationId}")]
         public string GetCitedInBookById(int bookId, int citationId) 
         { return "you get \nbook#" + bookId + "\ncitation#" + citationId; }
+
+        /* QUERY SEARCH IN ROUTE */
+
+        [Route("search")]
+        [Route("kearch")]
+        public string SearchBooks(int bookId, string bookName) 
+        {
+            return "seach result " +
+                "\nbookId="+bookId+"\nbookName="+bookName;
+        }
 
 
     }

@@ -20,5 +20,19 @@ namespace FromScratchConsole2WebApi.Controllers
         { 
             return "return of getallauthors action"; 
         }
+
+        /*dynamic values (variables) in route*/
+
+        [Route("/{bookId}")]//variable in {}
+        [Route("/book/{bookId}")]
+        public string GetBookById(int bookId)
+        { return "you get \nbook#" + bookId; }
+
+        [Route("/{bookId}/{citationId}")]
+        [Route("/book/{bookId}/citation/{citationId}")]
+        public string GetCitedInBookById(int bookId, int citationId) 
+        { return "you get \nbook#" + bookId + "\ncitation#" + citationId; }
+
+
     }
 }

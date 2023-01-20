@@ -4,7 +4,7 @@
   <PropertyGroup>
     <!--<OutputType>Exe</OutputType>-->
     <TargetFramework>net5.0</TargetFramework>
-	  <LangVersion>10</LangVersion>
+	  <LangVersion>10</LangVersion> <!--lambda expression usage required c#10-->
   </PropertyGroup>
 
 </Project>

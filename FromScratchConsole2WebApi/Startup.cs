@@ -80,14 +80,7 @@ namespace FromScratchConsole2WebApi
              * endpointrouting
              */
 
-            app.Use(async (context, next) =>
-            {
-            await context.Response.WriteAsync("now try endpointsrouting in address bar \n " +
-            "add [/api]/gettall or /getallauthors");
-            await next();
-            });
-
-
+            app.Map("",IndexMiddleware);
             app.UseRouting();//just enabling routing, not calling endpoint
                              //a routing is basically mapping the incoming http request method
 
@@ -111,12 +104,22 @@ namespace FromScratchConsole2WebApi
             });
         }
 
+        private void IndexMiddleware(IApplicationBuilder app) 
+        {
+            app.Use(async (context, next) =>
+            {
+                await context.Response.WriteAsync("now try endpointsrouting in address bar \n " +
+                "add [/api]/gettall or /getallauthors");
+                await next();
+            });
+        }
         private void BuiltinMiddleware(IApplicationBuilder app)
         {
             app.Use(async (context, next) =>
             {
                 await context.Response.WriteAsync("response from custom-mapped " +
                     "builtInMiddleware via the route /saga \n");
+                //await next();
             });
         }
     }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using FromScratchConsole2WebApi.Controllers;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -79,10 +80,18 @@ namespace FromScratchConsole2WebApi
             /* 
              * endpointrouting
              */
+        
 
-            app.Map("",IndexMiddleware);
             app.UseRouting();//just enabling routing, not calling endpoint
                              //a routing is basically mapping the incoming http request method
+
+           // app.Map("", IndexMiddleware);//not routing to next??
+
+            app.Use(async (context, next) =>
+            {
+                await context.Response.WriteAsync("try [/api]/gettall or [api]/getallauthors \n");
+                await next();
+            });
 
             app.UseEndpoints(endpoints =>
             {
@@ -104,22 +113,22 @@ namespace FromScratchConsole2WebApi
             });
         }
 
-        private void IndexMiddleware(IApplicationBuilder app) 
+        private void IndexMiddleware(IApplicationBuilder app)
         {
             app.Use(async (context, next) =>
             {
                 await context.Response.WriteAsync("now try endpointsrouting in address bar \n " +
-                "add [/api]/gettall or /getallauthors");
+                "add [/api]/gettall or /getallauthors\n");
                 await next();
             });
         }
+
         private void BuiltinMiddleware(IApplicationBuilder app)
         {
             app.Use(async (context, next) =>
             {
                 await context.Response.WriteAsync("response from custom-mapped " +
                     "builtInMiddleware via the route /saga \n");
-                //await next();
             });
         }
     }

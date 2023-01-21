@@ -5,22 +5,23 @@ using System.ComponentModel;
 namespace FromScratchConsole2WebApi.Controllers
 {
     //[Route("api/[controller]")]
+    [Route("[controller]/[action]")]//api level dynamic token replacement
     [ApiController]
     public class ValuesController : ControllerBase
     {
-        [Route("api/getall")]
+       // [Route("api/getall")]
         [Route("getall")]
-        [Route("get-all")]//can have many url for one resourse,cant have one url  for many resources
-        [Route("values/getall")]//it works, tokenreplacement is dynamic version of this
-        [Route("[controller]/[action]")]//dynamic token replacement in routing
+       // [Route("get-all")]//can have many url for one resourse,cant have one url  for many resources
+        //[Route("values/getall")]//it works, tokenreplacement is dynamic version of this
+       // [Route("[controller]/[action]")]//dynamic token replacement in routing
         public string GetAll()
         {
             return "return of getall action";
         }
         
-        [Route("api/getallauthors")]
+       // [Route("api/getallauthors")]
         [Route("getallauthors")]
-        [Route("[controller]/[action]")]
+       // [Route("[controller]/[action]")]
         public string GetAllAuthors()
         { 
             return "return of getallauthors action"; 

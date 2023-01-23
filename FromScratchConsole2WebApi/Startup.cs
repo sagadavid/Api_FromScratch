@@ -81,12 +81,12 @@ namespace FromScratchConsole2WebApi
              * ENDPOINTS
              */
 
-            app.Use(async (context, next) =>
-            {
-                await context.Response.WriteAsync("try [/api]/gettall or " +
-                    "[api]/getallauthors \n and so on\n");
-                await next();
-            });
+            //app.Use(async (context, next) =>
+            //{
+            //    await context.Response.WriteAsync("try [/api]/gettall or " +
+            //        "[api]/getallauthors \n and so on\n");
+            //    await next();
+            //});
 
             app.UseRouting();//just enabling routing, not calling endpoint
                              //a routing is basically mapping the incoming http request method

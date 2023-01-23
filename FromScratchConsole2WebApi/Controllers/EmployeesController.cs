@@ -28,7 +28,8 @@ namespace FromScratchConsole2WebApi.Controllers
         }
 
         [Route("{id}")]
-        //returns multiple types of data 
+        //returns multiple types of data
+        //swagger cant identify return types unless exactly specified but postman does
         public IActionResult GetEmployees(int id)
         {
             if (id == 0) { return NotFound(); }
@@ -40,6 +41,14 @@ namespace FromScratchConsole2WebApi.Controllers
                 new Employee() { Id = 43, Name = "Shevchenko" }
             }
             );
+        }
+
+        //return multiple types/actionresult with specified type
+        [Route("{id}/basic")]
+        public ActionResult<Employee> GetEmployeesBasicDetails(int id)
+        {
+            if (id == 0) { return NotFound(); }
+            return new Employee() { Id = 43, Name = "Shevchenko" };
         }
     }
 }

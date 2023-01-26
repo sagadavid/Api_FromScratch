@@ -77,7 +77,9 @@ namespace FromScratchConsole2WebApi.Controllers
         //(note that we wont use property to hold/bind data,
         //we'll pass in via query)
         
+        [HttpPost("")]
         [HttpGet("")]
+        //postman post: https://localhost:56957/api/countries?area=3454&populus=567&name=polanis
         //postman get: https://localhost:56957/api/countries?area=34&populus=123&name=patagonia //200
         public IActionResult DataViaQuery(string name, int populus, int area) 
         {

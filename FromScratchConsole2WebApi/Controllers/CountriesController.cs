@@ -104,16 +104,27 @@ namespace FromScratchConsole2WebApi.Controllers
 
         //PASS COMPLEX TYPES VIA BODY 
 
+        //besides type, names should match (fx, pupulus vs population)
         [HttpGet("")]
         [HttpPost("")]
+        //https://localhost:56957/api/countries/ //200
+        //postman body/raw/json:
+        //{ "NAME":"danmark", "Population":34523,"AREA":23423}
         public IActionResult PassComplexData(Country country) 
         {
             return Ok($"PASSED COMPLEX DATA" +
                 $"\nname={country.Name}," +
-                $"pop={country.Population}, " +
+                $"population={country.Population}, " +
                 $"area={country.Area}");
         }
 
+        //PASS DATA FROM QUERY STRING
+        
+        [HttpGet("{name}")]//QUERY YIELDS URL.. NOTICE THAT IN POSTMAN
+        public IActionResult PassData([FromQuery] string name) 
+        {
+            return Ok($"name={name}");
+        }
 
 
     }

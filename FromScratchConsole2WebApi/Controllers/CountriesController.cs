@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using FromScratchConsole2WebApi.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FromScratchConsole2WebApi.Controllers
@@ -7,24 +8,44 @@ namespace FromScratchConsole2WebApi.Controllers
     [ApiController]
     public class CountriesController : ControllerBase
     {
+        //bind inside the controller
 
-        [BindProperty]
-        public string Name { get; set; }
-        
-        [BindProperty]
-        public int Population { get; set; }
+        //[BindProperty]//needed for each prop
+        //public string Name { get; set; }
 
-        [BindProperty]
-        public int Area { get; set; }
+        //[BindProperty]
+        //public int Population { get; set; }
+
+        //[BindProperty]
+        //public int Area { get; set; }
+
+
+        [BindProperty]//bind to the model, no need for each prop
+        public Country  Country { get; set; }
 
         [HttpPost("")]
         public IActionResult AddCountry()
 
-        //on api/countries-->postman/post/formdata{key,value-->name,norge}//200
+        //on api/countries-->
+        //postman/post/formdata-->
+        //{key,value-->name,norge}//200
+
+
+        //Binded in the controller
         
             //{ return Ok(this.Name); }
-        { return Ok($"\nName={this.Name},\nPopulation={this.Population},\nArea={this.Area}"); }
-        
 
+        //{ return Ok($"\nName={this.Name},
+        //\nPopulation={this.Population},
+        //\nArea={this.Area}"); }//200
+
+
+        //Bibded to the model
+        { return Ok($"\nName={this.Country.Name}," +
+            $"\nPopulation={this.Country.Population}," +
+            $"\nArea={this.Country.Area}");//200
     }
+
+
+}
 }

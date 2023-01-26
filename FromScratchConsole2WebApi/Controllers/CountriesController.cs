@@ -6,6 +6,11 @@ namespace FromScratchConsole2WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    
+    [BindProperties(SupportsGet =true)]//used controller level BUT ALSO FOR MODELS..
+                    //no decoration for each props..
+                    //wont work for get UNLESS ENABLED
+          
     public class CountriesController : ControllerBase
     {
         //bind inside the controller
@@ -19,10 +24,14 @@ namespace FromScratchConsole2WebApi.Controllers
         //[BindProperty]
         //public int Area { get; set; }
 
+        /****************************************************/
 
         //[BindProperty]//bind to the model, no need for each prop
-        [BindProperty(SupportsGet =true)]//bind enabled for get requests
+        //[BindProperty(SupportsGet =true)]//binding enabled for get requests
+
         public Country Country { get; set; }
+
+        /***********************************************/
 
         [HttpPost("")]
         public IActionResult AddCountry()
@@ -36,24 +45,30 @@ namespace FromScratchConsole2WebApi.Controllers
 
         //{ return Ok(this.Name); }
 
-        //{ return Ok($"\nName={this.Name},
-        //\nPopulation={this.Population},
-        //\nArea={this.Area}"); }//200
-
+        //{ 
+        //return Ok($"POSTED " +
+        //    $"\nName={this.Name}," +
+        //    $"\nPopulation ={ this.Population}," +
+        //    $"\nArea ={ this.Area}");
+        //}
 
         //Binded to the model
         {
-            return Ok($"\nName={this.Country.Name}," +
+            return Ok($"POSTED " +
+                $"\nName={this.Country.Name}," +
             $"\nPopulation={this.Country.Population}," +
             $"\nArea={this.Country.Area}");//200
         }
 
+        /************************************************/
+
         [HttpGet("")]//bind attribute is mutated for getrequest
         public IActionResult GetCountry()
         {
-            return Ok($"\nName={this.Country.Name}," +
+            return Ok($"GOT " +
+                $"\nName={this.Country.Name}," +
             $"\nPopulation={this.Country.Population}, " +
-            $"Area={this.Country.Area}");
+            $"\nArea={this.Country.Area}");
         }
     }
 }

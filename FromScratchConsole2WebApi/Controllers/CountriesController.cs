@@ -7,7 +7,7 @@ namespace FromScratchConsole2WebApi.Controllers
     [Route("api/[controller]")]
     [ApiController]
     
-    [BindProperties(SupportsGet =true)]//used controller level BUT ALSO FOR MODELS..
+    //[BindProperties(SupportsGet =true)]//used controller level BUT ALSO FOR MODELS..
                     //no decoration for each props..
                     //wont work for get UNLESS ENABLED
           
@@ -29,12 +29,12 @@ namespace FromScratchConsole2WebApi.Controllers
         //[BindProperty]//bind to the model, no need for each prop
         //[BindProperty(SupportsGet =true)]//binding enabled for get requests
 
-        public Country Country { get; set; }
+        //public Country Country { get; set; }
 
         /***********************************************/
 
-        [HttpPost("")]
-        public IActionResult AddCountry()
+        //[HttpPost("")]
+        //public IActionResult AddCountry()
 
         //on api/countries-->
         //postman/post/formdata-->
@@ -53,22 +53,39 @@ namespace FromScratchConsole2WebApi.Controllers
         //}
 
         //Binded to the model
-        {
-            return Ok($"POSTED " +
-                $"\nName={this.Country.Name}," +
-            $"\nPopulation={this.Country.Population}," +
-            $"\nArea={this.Country.Area}");//200
-        }
+        //{
+        //    return Ok($"POSTED " +
+        //        $"\nName={this.Country.Name}," +
+        //    $"\nPopulation={this.Country.Population}," +
+        //    $"\nArea={this.Country.Area}");//200
+        //}
 
         /************************************************/
 
-        [HttpGet("")]//bind attribute is mutated for getrequest
-        public IActionResult GetCountry()
+        //[HttpGet("")]//bind attribute is mutated for getrequest
+        //public IActionResult GetCountry()
+        //{
+        //    return Ok($"GOT " +
+        //        $"\nName={this.Country.Name}," +
+        //    $"\nPopulation={this.Country.Population}, " +
+        //    $"\nArea={this.Country.Area}");
+        //}
+
+        /*****************************************/
+        //pass data via query..NOT BINDING..
+        //comment out all bind attributes and properties etc
+        //(note that we wont use property to hold/bind data,
+        //we'll pass in via query)
+        
+        [HttpGet("")]
+        //postman get: https://localhost:56957/api/countries?area=34&populus=123&name=patagonia //200
+        public IActionResult DataViaQuery(string name, int populus, int area) 
         {
-            return Ok($"GOT " +
-                $"\nName={this.Country.Name}," +
-            $"\nPopulation={this.Country.Population}, " +
-            $"\nArea={this.Country.Area}");
+            return Ok($"DATA VIA QUERYSTRING" +
+                $"\n  name={name}, populus={populus}, area={area}");
         }
+
+
+
     }
 }

@@ -8,10 +8,10 @@ namespace FromScratchConsole2WebApi.Controllers
     [Route("test/[action]")]//reuires action method name for routing, unless 404
     public class TestController:ControllerBase
     {
-        public string Get() => "this is the resource to Get";
+        public string Get1() => "this is the resource to Get1";
 
         //we need to get error, of get1():AmbiguousMatchException..
         //to get error add app.usedeveloperexceptionpage() under configure
-        public string Get1() => "this is the resource to Get1";
+        public string Get2() => "this is the resource to Get2";
     }
 }

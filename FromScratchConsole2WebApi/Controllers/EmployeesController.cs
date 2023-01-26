@@ -5,8 +5,8 @@ using System.Collections.Generic;
 
 namespace FromScratchConsole2WebApi.Controllers
 {
-    //[Route("api/[controller]")]//best practice
-    [Route("[controller]")]
+    [Route("api/[controller]")]//best practice
+    //[Route("[controller]")]
     [ApiController]
     public class EmployeesController : ControllerBase
     {
@@ -43,7 +43,7 @@ namespace FromScratchConsole2WebApi.Controllers
             );
         }
 
-        //return multiple types/actionresult with specified type
+        //return multiple types/actionresult<T> with specified type
         [Route("{id}/basic")]
         public ActionResult<Employee> GetEmployeesBasicDetails(int id)
         {

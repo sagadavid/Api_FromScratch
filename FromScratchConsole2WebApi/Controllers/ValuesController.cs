@@ -4,8 +4,8 @@ using System.ComponentModel;
 
 namespace FromScratchConsole2WebApi.Controllers
 {
-    //[Route("api/[controller]")]
-    [Route("[controller]/[action]")]//api level dynamic token replacement
+    [Route("api/[controller]/[action]")]
+    //[Route("[controller]/[action]")]//api level dynamic token replacement
                                     //base url
     [ApiController]
     public class ValuesController : ControllerBase

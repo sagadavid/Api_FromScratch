@@ -72,26 +72,46 @@ namespace FromScratchConsole2WebApi.Controllers
         //}
 
         /*****************************************/
-        //pass data via query..NOT BINDING..
+        //PASS DATA VIA QUERY..NOT BINDING..
+
         //comment out all bind attributes and properties etc
         //(note that we wont use property to hold/bind data,
         //we'll pass in via query)
-        
+
         //[HttpPost("")]
         //[HttpGet("")]
         //same method works fine with two attributes 
+        //data order doesnt count
         //postman post: https://localhost:56957/api/countries?area=3454&populus=567&name=polanis
         //postman get: https://localhost:56957/api/countries?area=34&populus=123&name=patagonia //200
 
+        //PASS SIMPLE TYPES VIA URL
+
+        //[HttpPost("{name}/{area}/{populus}")]
+        //[HttpGet("{name}/{area}/{populus}")]
+        //postman get: https://localhost:56957/api/countries/caprika/34/234 
+        //200 //data type counts so the order.. according to url
+        //postman post: https://localhost:56957/api/countries/galaktika/234/134 
+        //200 //data type counts
 
         [HttpPost("{name}/{area}/{populus}")]
         [HttpGet("{name}/{area}/{populus}")]
-        //postman get: https://localhost:56957/api/countries/caprika/34/234 //200
-        //postman post: https://localhost:56957/api/countries/galaktika/234/134 //200
-        public IActionResult DataViaQuery(string name, int populus, int area) 
+        public IActionResult DataViaQueryOrUrl(string name, int populus, int area) 
         {
             return Ok($"DATA VIA QUERYSTRING" +
                 $"\n  name={name}, populus={populus}, area={area}");
+        }
+
+        //PASS COMPLEX TYPES VIA BODY 
+
+        [HttpGet("")]
+        [HttpPost("")]
+        public IActionResult PassComplexData(Country country) 
+        {
+            return Ok($"PASSED COMPLEX DATA" +
+                $"\nname={country.Name}," +
+                $"pop={country.Population}, " +
+                $"area={country.Area}");
         }
 
 

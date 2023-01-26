@@ -99,5 +99,28 @@ namespace FromScratchConsole2WebApi.Controllers
 
         }
 
+
+        [Route("getatlocal")]
+        public IActionResult GetAtLocal() 
+        {
+            return LocalRedirect("~/api/animals");
+            
+            
+
+            //return LocalRedirectPermanent("~/api/animals");
+            
+            //Request URL: https://localhost:56957/api/animals/getatlocal 
+            //Request Method: GET
+            ////Status Code: 301(from disk cache)
+
+            //Request URL: https://localhost:56957/api/animals
+            //Request Method: GET
+            //Status Code: 200
+
+        }
+
+
+
+
     }
 }

@@ -20,8 +20,9 @@ namespace FromScratchConsole2WebApi.Controllers
         //public int Area { get; set; }
 
 
-        [BindProperty]//bind to the model, no need for each prop
-        public Country  Country { get; set; }
+        //[BindProperty]//bind to the model, no need for each prop
+        [BindProperty(SupportsGet =true)]//bind enabled for get requests
+        public Country Country { get; set; }
 
         [HttpPost("")]
         public IActionResult AddCountry()
@@ -32,20 +33,27 @@ namespace FromScratchConsole2WebApi.Controllers
 
 
         //Binded in the controller
-        
-            //{ return Ok(this.Name); }
+
+        //{ return Ok(this.Name); }
 
         //{ return Ok($"\nName={this.Name},
         //\nPopulation={this.Population},
         //\nArea={this.Area}"); }//200
 
 
-        //Bibded to the model
-        { return Ok($"\nName={this.Country.Name}," +
+        //Binded to the model
+        {
+            return Ok($"\nName={this.Country.Name}," +
             $"\nPopulation={this.Country.Population}," +
             $"\nArea={this.Country.Area}");//200
+        }
+
+        [HttpGet("")]//bind attribute is mutated for getrequest
+        public IActionResult GetCountry()
+        {
+            return Ok($"\nName={this.Country.Name}," +
+            $"\nPopulation={this.Country.Population}, " +
+            $"Area={this.Country.Area}");
+        }
     }
-
-
-}
 }

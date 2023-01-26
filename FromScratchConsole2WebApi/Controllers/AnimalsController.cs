@@ -73,14 +73,14 @@ namespace FromScratchConsole2WebApi.Controllers
                                 //returns ctor created animals if request contains asd letters
         }
 
-
+        //whollycommented for the sake of not found return line 130
         //this method will be called by post mehtod below !
-        [Route("{id:int}")]
-        public IActionResult AddedAnimalById(int id) 
-        {
-        if (id ==0) return BadRequest();
-        return Ok(_animals.FirstOrDefault(a=>a.Id==id));//bring id-matching animal
-        }
+        //[Route("{id:int}")]
+        //public IActionResult AddedAnimalById(int id) 
+        //{
+        //if (id ==0) return BadRequest();
+        //return Ok(_animals.FirstOrDefault(a=>a.Id==id));//bring id-matching animal
+        //}
 
 
         //post/add a new animal via postman/post/body:{id,name}..get 201 created response
@@ -103,12 +103,20 @@ namespace FromScratchConsole2WebApi.Controllers
         [Route("getatlocal")]
         public IActionResult GetAtLocal() 
         {
-            return LocalRedirect("~/api/animals");
             
+            //return LocalRedirect("~/api/animals");
             
+            //Request URL: https://localhost:56957/api/animals/getatlocal
+            //Request Method: GET
+            //Status Code: 302(from disk cache)
 
-            //return LocalRedirectPermanent("~/api/animals");
-            
+            //Request URL: https://localhost:56957/api/animals
+            //Request Method: GET
+            //Status Code: 200
+
+
+            return LocalRedirectPermanent("~/api/animals");
+
             //Request URL: https://localhost:56957/api/animals/getatlocal 
             //Request Method: GET
             ////Status Code: 301(from disk cache)
@@ -119,7 +127,25 @@ namespace FromScratchConsole2WebApi.Controllers
 
         }
 
+        [Route("{id:int}")]
+        public IActionResult GetAnimalById(int id)
+        {
+            if (id == 0) return BadRequest();
+            var askedAnimal = _animals.FirstOrDefault(a => a.Id == id);
 
+            if (askedAnimal == null) return NotFound();//there is no animal, not found 404
+                                                       //tere is.. found 200
+                                                       // Request URL: https://localhost:56957/api/animals/2345
+                                                       // Request Method: GET
+                                                       // Status Code: 404
+
+           // Request URL: https://localhost:56957/api/animals/123
+           // Request Method: GET
+           // Status Code: 200
+
+
+            return Ok(askedAnimal);
+        }
 
 
     }

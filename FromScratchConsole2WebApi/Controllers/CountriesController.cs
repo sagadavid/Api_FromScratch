@@ -119,7 +119,7 @@ namespace FromScratchConsole2WebApi.Controllers
         //}
 
         //PASS DATA FROM QUERY STRING
-        
+
         //[HttpGet("{name}")]//QUERY YIELDS URL.. NOTICE THAT IN POSTMAN
         ////postman get: https://localhost:56957/api/countries/ENGLAND?name=USA
         ////here on postman, england passed via url, but usa passed via fromquery !!!
@@ -130,13 +130,29 @@ namespace FromScratchConsole2WebApi.Controllers
         //}
 
         //pass data from query for complex type
-        
-        [HttpPost("")]//can post data via post/body, however from query yields on url data passing again
-        public IActionResult PostComplexData([FromQuery] Country country)
-        {
-            return Ok($"name={country.Name}");
-        }
 
+        //    [HttpPost("")]//can post data via post/body,
+        //                  //however from query yields on url data passing again
+        //    //postman/post query: https://localhost:56957/api/countries?Name=danmark&Population=89&Area=67 //200
+        //    //postman/post body : {"name":"finland","population":23,"area":45}
+        //public IActionResult PostComplexData([FromQuery] Country country)//in the query, capital letter matters
+        //    {
+        //        return Ok($"posted fromquery" +
+        //            $"\nname={country.Name}" +
+        //            $"\npop={country.Population}" +
+        //            $"\narea={country.Area}");
+        //    }
+
+        //PASSDATA FROMROUTE
+        //url:switzerland, query:germany
+        //https://localhost:56957/api/countries/switzerland?Name=germany
+        //body:{"name":"finland"}
+        //response is : switzerland// [FROMROUTE] YIELDS !
+    [HttpPost("{name}")]
+        public IActionResult PostViaRoute([FromRoute] string name) 
+        {
+            return Ok($"name={name}");
+        }
 
     }
 }

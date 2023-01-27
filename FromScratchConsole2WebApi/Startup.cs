@@ -18,7 +18,7 @@ namespace FromScratchConsole2WebApi
             services.AddControllers();//only web api
             //services.AddMvc();//mvc for api, for razor pages and for web app
             //services.AddRazorPages();//only razorpages
-            services.AddTransient<SeperateFileMiddleware1>();//custom middleware class requires dependency injection.
+            services.AddTransient<CustomFileMiddleware>();//custom middleware class requires dependency injection.
         
         }
 
@@ -45,7 +45,7 @@ namespace FromScratchConsole2WebApi
             //after customresponse mehtod backwards cause has no next
             app.Map("/saga", BuiltinMiddleware);//could be index as.. app.Map("", BuiltinMiddleware);
             
-            app.UseMiddleware<SeperateFileMiddleware1>();
+            app.UseMiddleware<CustomFileMiddleware>();
 
             app.Use(async (context, next) =>
             {

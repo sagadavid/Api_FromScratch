@@ -210,13 +210,22 @@ namespace FromScratchConsole2WebApi.Controllers
         //as if we decoreate any attirbure --[FromRoute] int id--,
         //decorate we stringcountries with our ModelBinder which names Custommodelbinder(class) 
         public IActionResult SearchCountries
-            ([ModelBinder(typeof(CustomModelBinder))]string[] countries) 
+            ([ModelBinder(typeof(CustomModelBinderCountries))]string[] countries) 
         {
             return Ok(countries);
             //postman get/send query: https://localhost:56957/api/countries/search?countries=norge|sverige|danmark|iceland //200
             //query is visible in params as well
             //response body:["norge","sverige","danmark","iceland"]
         }
+
+
+        [HttpGet("{id}")]
+        public IActionResult CountryDetails 
+            ([ModelBinder(Name ="Id")]Country country)
+            //name here is not "value2bind",
+            //just because it needs to be an actual property name of data/model
+        { return Ok(country);}
+
 
 
     }

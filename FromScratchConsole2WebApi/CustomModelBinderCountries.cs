@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace FromScratchConsole2WebApi
 {
-    public class CustomModelBinder : IModelBinder
+    public class CustomModelBinderCountries : IModelBinder
     {
         //binding source : custom
         //field name: countries

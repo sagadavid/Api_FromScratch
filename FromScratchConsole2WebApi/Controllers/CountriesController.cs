@@ -192,19 +192,31 @@ namespace FromScratchConsole2WebApi.Controllers
 
 
         //fromheader
-        [HttpPost("{id}")]
-        public IActionResult PostHeader(
-            [FromRoute] int id,
-            [FromHeader] string developer)
+        //[HttpPost("{id}")]
+        //public IActionResult PostHeader(
+        //    [FromRoute] int id,
+        //    [FromHeader] string developer)
+        //{
+        //    return Ok($"id={id}" +
+        //    $"developer={developer}");
+        //    //header key,value --> developer,davidsaga
+        //    //response: id=71developer=davidsaga
+        //}
+
+        /******** CUSTOM MODEL BINDING*******/
+
+        //[HttpGet("search")]
+        [HttpGet("enquire")]//go with ? in the route
+        //as if we decoreate any attirbure --[FromRoute] int id--,
+        //decorate we stringcountries with our ModelBinder which names Custommodelbinder(class) 
+        public IActionResult SearchCountries
+            ([ModelBinder(typeof(CustomModelBinder))]string[] countries) 
         {
-            return Ok($"id={id}" +
-            $"developer={developer}");
-            //header key,value --> developer,davidsaga
-            //response: id=71developer=davidsaga
+            return Ok(countries);
+            //postman get/send query: https://localhost:56957/api/countries/search?countries=norge|sverige|danmark|iceland //200
+            //query is visible in params as well
+            //response body:["norge","sverige","danmark","iceland"]
         }
-
-
-
 
 
     }

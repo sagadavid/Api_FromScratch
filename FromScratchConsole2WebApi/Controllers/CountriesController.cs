@@ -94,36 +94,47 @@ namespace FromScratchConsole2WebApi.Controllers
         //postman post: https://localhost:56957/api/countries/galaktika/234/134 
         //200 //data type counts
 
-        [HttpPost("{name}/{area}/{populus}")]
-        [HttpGet("{name}/{area}/{populus}")]
-        public IActionResult DataViaQueryOrUrl(string name, int populus, int area) 
-        {
-            return Ok($"DATA VIA QUERYSTRING" +
-                $"\n  name={name}, populus={populus}, area={area}");
-        }
+        //[HttpPost("{name}/{area}/{populus}")]
+        //[HttpGet("{name}/{area}/{populus}")]
+        //public IActionResult DataViaQueryOrUrl(string name, int populus, int area) 
+        //{
+        //    return Ok($"DATA VIA QUERYSTRING" +
+        //        $"\n  name={name}, populus={populus}, area={area}");
+        //}
 
         //PASS COMPLEX TYPES VIA BODY 
 
         //besides type, names should match (fx, pupulus vs population)
-        [HttpGet("")]
-        [HttpPost("")]
-        //https://localhost:56957/api/countries/ //200
-        //postman body/raw/json:
-        //{ "NAME":"danmark", "Population":34523,"AREA":23423}
-        public IActionResult PassComplexData(Country country) 
-        {
-            return Ok($"PASSED COMPLEX DATA" +
-                $"\nname={country.Name}," +
-                $"population={country.Population}, " +
-                $"area={country.Area}");
-        }
+        //[HttpGet("")]
+        //[HttpPost("")]
+        ////https://localhost:56957/api/countries/ //200
+        ////postman body/raw/json:
+        ////{ "NAME":"danmark", "Population":34523,"AREA":23423}
+        //public IActionResult PassComplexData(Country country) 
+        //{
+        //    return Ok($"PASSED COMPLEX DATA" +
+        //        $"\nname={country.Name}," +
+        //        $"population={country.Population}, " +
+        //        $"area={country.Area}");
+        //}
 
         //PASS DATA FROM QUERY STRING
         
-        [HttpGet("{name}")]//QUERY YIELDS URL.. NOTICE THAT IN POSTMAN
-        public IActionResult PassData([FromQuery] string name) 
+        //[HttpGet("{name}")]//QUERY YIELDS URL.. NOTICE THAT IN POSTMAN
+        ////postman get: https://localhost:56957/api/countries/ENGLAND?name=USA
+        ////here on postman, england passed via url, but usa passed via fromquery !!!
+        ////and passed value/result is//200 : name=USA
+        //public IActionResult PassData([FromQuery] string name) 
+        //{
+        //    return Ok($"name={name}");
+        //}
+
+        //pass data from query for complex type
+        
+        [HttpPost("")]//can post data via post/body, however from query yields on url data passing again
+        public IActionResult PostComplexData([FromQuery] Country country)
         {
-            return Ok($"name={name}");
+            return Ok($"name={country.Name}");
         }
 
 

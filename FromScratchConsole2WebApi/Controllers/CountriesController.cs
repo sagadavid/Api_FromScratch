@@ -178,14 +178,34 @@ namespace FromScratchConsole2WebApi.Controllers
         //public IActionResult PostBody([FromBody] int id) 
         //{ return Ok($"id={id}"); }
 
-        [HttpPost("{id}")]
-        public IActionResult PostBody(
-            [FromRoute] int id, 
-            [FromForm] string color)
-        { return Ok($"id={id}" +
-            $"color={color}"); }
+
+        //fromform
+        //[HttpPost("{id}")]
+        //public IActionResult PostBody(
+        //    [FromRoute] int id, 
+        //    [FromForm] string color)
+        //{ return Ok($"id={id}" +
+        //    $"color={color}"); }
         //post: https://localhost:56957/api/countries/765
         //from-form:key-color, value-bronze
         //response:id=765color=bronze
+
+
+        //fromheader
+        [HttpPost("{id}")]
+        public IActionResult PostHeader(
+            [FromRoute] int id,
+            [FromHeader] string developer)
+        {
+            return Ok($"id={id}" +
+            $"developer={developer}");
+            //header key,value --> developer,davidsaga
+            //response: id=71developer=davidsaga
+        }
+
+
+
+
+
     }
 }

@@ -148,10 +148,22 @@ namespace FromScratchConsole2WebApi.Controllers
         //https://localhost:56957/api/countries/switzerland?Name=germany
         //body:{"name":"finland"}
         //response is : switzerland// [FROMROUTE] YIELDS !
-    [HttpPost("{name}")]
-        public IActionResult PostViaRoute([FromRoute] string name) 
+    //[HttpPost("{name}")]
+    //    public IActionResult PostViaRoute([FromRoute] string name) 
+    //    {
+    //        return Ok($"name={name}");
+    //    }
+
+        //USE OF MULTIPLE ATTRIBUTES AND TYPES
+        
+        [HttpPost("{brand}")]
+        public IActionResult PostViaRoute([FromRoute] string brand, 
+            [FromQuery] int id, Country model)
         {
-            return Ok($"name={name}");
+            return Ok(
+                $"\nname={brand}" +
+                $"\nid={id}" +
+                $"\nname={model.Name}");
         }
 
     }

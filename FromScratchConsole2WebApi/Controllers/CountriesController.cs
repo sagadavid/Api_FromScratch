@@ -148,23 +148,35 @@ namespace FromScratchConsole2WebApi.Controllers
         //https://localhost:56957/api/countries/switzerland?Name=germany
         //body:{"name":"finland"}
         //response is : switzerland// [FROMROUTE] YIELDS !
-    //[HttpPost("{name}")]
-    //    public IActionResult PostViaRoute([FromRoute] string name) 
-    //    {
-    //        return Ok($"name={name}");
-    //    }
+        //[HttpPost("{name}")]
+        //    public IActionResult PostViaRoute([FromRoute] string name) 
+        //    {
+        //        return Ok($"name={name}");
+        //    }
 
-        //USE OF MULTIPLE ATTRIBUTES AND TYPES
-        
-        [HttpPost("{brand}")]
-        public IActionResult PostViaRoute([FromRoute] string brand, 
-            [FromQuery] int id, Country model)
-        {
-            return Ok(
-                $"\nname={brand}" +
-                $"\nid={id}" +
-                $"\nname={model.Name}");
-        }
+        //symulteneous USE OF MULTIPLE ATTRIBUTES AND TYPES
+
+        //    [HttpPost("{brand}")]
+        //    //post: https://localhost:56957/api/countries/TESLA?id=99
+        //    //body: {"name":"china is coming}
+        //    //response:name=TESLA id=99 name=china is coming
+        //public IActionResult PostViaRoute(
+        //        [FromRoute] string brand, 
+        //        [FromQuery] int id, 
+        //        Country model)
+        //    {
+        //        return Ok(
+        //            $"\nname={brand}" +
+        //            $"\nid={id}" +
+        //            $"\nname={model.Name}");
+        //    }
+
+        [HttpPost("{id}")]//data from body yields now
+        //query: https://localhost:56957/api/countries/9?id=8
+        //body:7
+        //response:7
+        public IActionResult PostBody([FromBody] int id) 
+        { return Ok($"id={id}"); }
 
     }
 }

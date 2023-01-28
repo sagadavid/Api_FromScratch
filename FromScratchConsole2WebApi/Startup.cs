@@ -23,6 +23,10 @@ namespace FromScratchConsole2WebApi
         
             //to use singleton, present the interface to the class that will be implemented of
             services.AddSingleton<IProductRepository, ProductRepository> ();
+            
+            //scoped.. the instance of interface lifetime will be inthe scope of httprequest
+            //which means eath httppost will create a new repository instanse and old posted data will be gone
+            //services.AddScoped<IProductRepository, ProductRepository>();    
         }
 
         //http request pipeline and environment

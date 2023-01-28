@@ -19,22 +19,30 @@ namespace FromScratchConsole2WebApi.Controllers
 
         //to use singleton architecure, use interface of respository
         private readonly IProductRepository _productRepository;
+        private readonly IProductRepository _productRepository11;
 
         //public ProductsController()
-        
+
         //to use singleton, inject interface to controller, set up it in services as well
-        public ProductsController(IProductRepository productRepository)
+        public ProductsController(
+            IProductRepository productRepository,
+            IProductRepository productRepository11
+            )
         {
 
             //_productRepository= new ProductRepository();
             _productRepository= productRepository;
+            _productRepository11 = productRepository11;
+            //evenif there is new instances of interface, 
+            //all posts from these instances of interface would still summon
+            //inthe same productslist, either.. in same single instance 
         }
-        
+
         [HttpPost("")]
         public IActionResult AddProduct([FromBody] Product product ) 
         {
         _productRepository.AddProduct(product); 
-            var products = _productRepository.GetProducts();
+            var products = _productRepository11.GetProducts();//notice here !
             return Ok(products);
         }
 

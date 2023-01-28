@@ -21,7 +21,7 @@ namespace FromScratchConsole2WebApi
             //services.AddRazorPages();//only razorpages
             services.AddTransient<CustomFileMiddleware>();//custom middleware class requires dependency injection.
         
-            //to use singleton, present the interface to the class that will be implemented of 
+            //to use singleton, present the interface to the class that will be implemented of
             services.AddSingleton<IProductRepository, ProductRepository> ();
         }
 

@@ -1,4 +1,5 @@
 ﻿using FromScratchConsole2WebApi.Controllers;
+using FromScratchConsole2WebApi.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -20,6 +21,8 @@ namespace FromScratchConsole2WebApi
             //services.AddRazorPages();//only razorpages
             services.AddTransient<CustomFileMiddleware>();//custom middleware class requires dependency injection.
         
+            //to use singleton, present the interface to the class that will be implemented of 
+            services.AddSingleton<IProductRepository, ProductRepository> ();
         }
 
         //http request pipeline and environment

@@ -9,11 +9,25 @@ namespace FromScratchConsole2WebApi.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        private readonly ProductRepository _productRepository;
+        /**services,WITHOUT DEPENDENCY INJECTION -CREATE NEW INSTANSES METHOD- 
+         * has some drawbacks
+         * repository here is re-created each time added a product 
+         * THAT MEANS WHENEVER YOU POST NEW PRODUCT DATA
+         * its alway one pruduct in the list, renews and renews the insatanse which holds data
+         * firs solution against drawback is using SINGLETON !! ***/
+        //private readonly ProductRepository _productRepository;
 
-        public ProductsController()
+        //to use singleton architecure, use interface of respository
+        private readonly IProductRepository _productRepository;
+
+        //public ProductsController()
+        
+        //to use singleton, inject interface to controller, set up it in services as well
+        public ProductsController(IProductRepository productRepository)
         {
-            _productRepository= new ProductRepository();
+
+            //_productRepository= new ProductRepository();
+            _productRepository= productRepository;
         }
         
         [HttpPost("")]

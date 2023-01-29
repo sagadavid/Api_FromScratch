@@ -24,13 +24,15 @@ namespace FromScratchConsole2WebApi.Controllers
         //public ProductsController()
 
         //to use singleton, inject interface to controller, set up it in services as well
-        public ProductsController(
+        public ProductsController
+            (
             IProductRepository productRepository,
             IProductRepository productRepository11
             )
         {
 
             //_productRepository= new ProductRepository();
+
             _productRepository= productRepository;
             _productRepository11 = productRepository11;
             //evenif there is new instances of interface, 
@@ -56,6 +58,12 @@ namespace FromScratchConsole2WebApi.Controllers
             var name = _productRepository.GetName;
             return Ok(name);
         }
+
+
+
+
+
+
 
     }
 }

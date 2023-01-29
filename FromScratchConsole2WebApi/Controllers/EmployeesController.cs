@@ -1,4 +1,5 @@
 ﻿using FromScratchConsole2WebApi.Models;
+using FromScratchConsole2WebApi.Repository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -50,5 +51,20 @@ namespace FromScratchConsole2WebApi.Controllers
             if (id == 0) { return NotFound(); }
             return new Employee() { Id = 43, Name = "Shevchenko" };
         }
+
+        //we want to use an interface of a (another controllers) repository
+        //just here in this mehtod !!
+        [HttpGet("navnet")]
+        public IActionResult GetName
+            ([FromServices] IProductRepository _productRepository)
+        {
+         
+            var name = _productRepository.GetName;
+            return Ok(name);
+        }
+
+
+
+
     }
 }

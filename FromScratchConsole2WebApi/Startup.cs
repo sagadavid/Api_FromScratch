@@ -23,13 +23,11 @@ namespace FromScratchConsole2WebApi
             services.AddTransient<CustomFileMiddleware>();//custom middleware class requires dependency injection.
         
             //to use singleton, present the interface to the class that will be implemented of
-            //services.AddSingleton<IProductRepository, ProductRepository> ();
-            //services.TryAddSingleton<IProductRepository, ProductRepository>();
+            services.AddSingleton<IProductRepository, ProductRepository> ();
 
             //scoped.. the instance of interface lifetime will be inthe scope of httprequest
             //which means eath httppost will create a new repository instanse and old posted data will be gone
             //services.AddScoped<IProductRepository, ProductRepository>();
-            //services.TryAddScoped<IProductRepository, ProductRepository>();
 
             //transient ... each request create new instance .. when used, in our example.. we use 2 instances of same interfaces
             //one instance adds sends data (new product), other instance holds data (list, products)
@@ -38,7 +36,6 @@ namespace FromScratchConsole2WebApi
             //as a result a product should be sent, but when all products called a totally new service will 
             //be created and we wont see any data, its empty because it is totally new 
             //services.AddTransient<IProductRepository, ProductRepository>();
-            services.TryAddTransient<IProductRepository, ProductRepository>();
 
             //a second repo is using same interface.. then old service is lost
             //which means old features of app is lost.. 
@@ -47,8 +44,8 @@ namespace FromScratchConsole2WebApi
             //to prevent this try versions are used. tryscoped, trytransient, trysingleton
             //if try used, means, the first service is valid if tried earlier.. second skipps
             //so...
-            //services.AddTransient<IProductRepository, SecondRepos4SameInterface>();
-            services.TryAddTransient<IProductRepository, SecondRepos4SameInterface>();
+            //services.TryAddTransient<IProductRepository, ProductRepository>();
+            //services.TryAddTransient<IProductRepository, SecondRepos4SameInterface>();
 
 
 

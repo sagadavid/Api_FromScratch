@@ -18,7 +18,7 @@ namespace FromScratchConsole2WebApi.Repository
 
         public string GetName()
         {
-            return "name from product repo";
+            return "name in product repo";
         }
 
         public List<Product> GetProducts() { return products; }

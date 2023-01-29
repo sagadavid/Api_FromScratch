@@ -53,7 +53,7 @@ namespace FromScratchConsole2WebApi.Controllers
         }
 
         //we want to use an interface of a (another controllers) repository
-        //just here in this mehtod !!
+        //just here in this mehtod !! use fromservices attribution and DI repo
         [HttpGet("navnet")]
         public IActionResult GetName
             ([FromServices] IProductRepository _productRepository)

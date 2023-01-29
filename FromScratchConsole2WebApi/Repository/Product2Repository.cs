@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace FromScratchConsole2WebApi.Repository
 {
-    public class SecondRepos4SameInterface : IProductRepository
+    public class Product2Repository : IProductRepository
     {
         public int AddProduct(Product product)
         {
@@ -12,7 +12,7 @@ namespace FromScratchConsole2WebApi.Repository
 
         public string GetName()
         {
-            return "name from secondrepo";
+            return "name in secondrepo";
         }
 
         public List<Product> GetProducts()

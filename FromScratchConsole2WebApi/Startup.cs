@@ -23,10 +23,20 @@ namespace FromScratchConsole2WebApi
         
             //to use singleton, present the interface to the class that will be implemented of
             services.AddSingleton<IProductRepository, ProductRepository> ();
-            
+
             //scoped.. the instance of interface lifetime will be inthe scope of httprequest
             //which means eath httppost will create a new repository instanse and old posted data will be gone
             //services.AddScoped<IProductRepository, ProductRepository>();    
+
+            //transient ... each request create new instance .. when used, in our example.. we use 2 instances of same interfaces
+            //one instance adds sends data (new product), other instance holds data (list, products)
+            //in singleton, it would summoned together and we would see all products, 
+            //when it is transient, two instances' calls/request will cause to create a new service and two sendings will never meet/summon
+            //as a result a product should be sent, but when all products called a totally new service will 
+            //be created and we wont see any data, its empty because it is totally new 
+            //services.AddTransient<IProductRepository, ProductRepository>();
+        
+        
         }
 
         //http request pipeline and environment

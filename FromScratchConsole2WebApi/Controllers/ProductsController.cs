@@ -41,9 +41,20 @@ namespace FromScratchConsole2WebApi.Controllers
         [HttpPost("")]
         public IActionResult AddProduct([FromBody] Product product ) 
         {
-        _productRepository.AddProduct(product); 
+        _productRepository.AddProduct(product);
+            //var products = _productRepository.GetProducts();
             var products = _productRepository11.GetProducts();//notice here !
             return Ok(products);
+        }
+
+        [HttpGet("namy")]
+        public IActionResult GetName()
+        {
+            //this getname is implemented in two different repos..
+            //so which repos will give the name ???
+            //see startup comments
+            var name = _productRepository.GetName;
+            return Ok(name);
         }
 
     }

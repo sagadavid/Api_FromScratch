@@ -8,5 +8,6 @@ namespace FromScratchConsole2WebApi.Repository
     {
         int AddProduct(Product product);
         List<Product> GetProducts();
+        string GetName();
     }
 }

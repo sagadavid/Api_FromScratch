@@ -1,4 +1,4 @@
-﻿using FromScratchConsole2WebApi.Models;
+﻿ using FromScratchConsole2WebApi.Models;
 using System.Collections.Generic;
 
 namespace FromScratchConsole2WebApi.Repository
@@ -14,6 +14,11 @@ namespace FromScratchConsole2WebApi.Repository
             product.Id = products.Count + 1;
             products.Add(product);
             return product.Id;
+        }
+
+        public string GetName()
+        {
+            return "name from product repo";
         }
 
         public List<Product> GetProducts() { return products; }

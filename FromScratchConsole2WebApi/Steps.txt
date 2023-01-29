@@ -1,0 +1,14 @@
+﻿latest steps
+-repository
+	-new instance
+	-singleton
+	-scoped
+	-transient
+	-trysingleton, tryscope, trytransient
+		TryAddScoped, TryAddSingleton, TryAddTransient
+		• If we are registering the dependency using AddScoped, AddSingleton or AddTransient 
+			method then they will replace the service in the
+			collection if it has already been registered in the container.
+		• Now If we use the Try version like TryAddScoped then it will only
+			register the service if it was not registered earlier. In case service was 
+			already registered then the TryAddScoped will skip the registration for that service.
